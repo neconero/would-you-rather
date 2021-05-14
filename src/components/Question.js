@@ -4,9 +4,20 @@ import {formatQuestion} from '../utils/helpers'
 
 class Question extends Component {
     render() {
-        console.log(this.props)
+        const {question} = this.props
+
+        const {name, avatar, id} = question
         return (
-            <div className="question"></div>
+            <div className="question">
+                <img 
+                    src={avatar}
+                    alt={`Avatar of ${name}`}
+                    className='avatar'
+                />
+                <div className="question-info">
+                    <span>{name}</span>
+                </div>
+            </div>
         )
     }
 }
@@ -16,7 +27,9 @@ function mapStateToProps({authedUser, users, questions}, {id}){
 
     return {
         authedUser,
-        question: formatQuestion(question, users[question.author], authedUser)
+        question: question
+            ? formatQuestion(question, users[question.author], authedUser)
+            : null
     }
 }
 
