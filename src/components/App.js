@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import {handleInitialData}  from '../actions/shared'
 import HomePage from './HomePage'
 import NavBar from './NavBar'
-import Login from './Login'
+import Login from './LoginForm'
+import LoginPage from './LoginPage'
 
 
 class App extends Component{
@@ -11,10 +12,11 @@ class App extends Component{
     this.props.dispatch(handleInitialData())
   }
   render() {
+    const {authedUser} = this.props
     return (
       <div className="App">
-        {this.props.loading === true 
-          ? <Login /> 
+        {authedUser == null 
+          ? <LoginPage /> 
           : <NavBar />}
         
       </div>

@@ -10,7 +10,8 @@ import{
         Typography,
         Menu,
         MenuItem,
-        makeStyles,   
+        makeStyles,
+        Avatar,   
     } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import {setAuthedUser} from '../actions/authedUser'
@@ -83,9 +84,11 @@ class NavBar extends Component {
                                 >
                                     LeaderBoard
                                 </Button>
-                                <img 
-                                    src={users[authedUser].avatar}
-                                    className='avatar'
+                                <Avatar
+                                    src={users[authedUser].avatarURL}
+                                    alt={`Avatar of ${users[authedUser].name}`}
+                                    className={classes.avatar}
+                                    color='inherit'
                                 />
                                 <Button
                                     color='inherit'
@@ -116,7 +119,15 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down("xs")]: {
           flexGrow: 1
         }
-      }
+      },
+      avatar: {
+        display: 'flex',
+        '& > *': {
+          
+          width: theme.spacing(3),
+          height: theme.spacing(3),
+        },
+      },
 }))
 
 function mapStateToProps({authedUser, users}){

@@ -14,6 +14,6 @@ export function formatQuestion(question, author, authedUser){
         timestamp,
         avatar: avatarURL,
         text: optionOne.text,
-        answered: optionOne.votes.includes(authedUser) || optionTwo.votes.includes(authedUser)
+        answered: optionOne.votes.concat(optionTwo.votes).includes(authedUser)
     }
 }
