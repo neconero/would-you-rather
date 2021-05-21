@@ -1,95 +1,69 @@
-import React, {Component, Fragment} from 'react'
-import {Formik, Form, Field} from 'formik'
-import {Select} from 'formik-material-ui'
-import {Box, Button, MenuItem} from '@material-ui/core'
-import Avatar from '@material-ui/core/Avatar';
-
+import React, {Component} from 'react'
+import {authenticateUser} from '../actions/shared'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 
-class LoginForm extends Component {
-    state={
-        value: 'Select...'
+
+class LoginForm extends Component{
+    state= {
+        userID: ''
     }
 
-    handleChange = (value) => {
-        this.setState({value})
+    handleChange = (event) => {
+
+        console.log(event.target.value)
+
+        this.setState({userID: event.target.value})
     }
 
     handleSubmit = (event) => {
         event.preventDefault()
-
-        const {onLoading, setAuthedUser, dispatch} = this.props
-        const authedUser = this.state.value
-
-        new Promise((resolve, reject) => {
-            onLoading()
-            setTimeout(() => resolve(), 300);
-        }).then(() => dispatch(setAuthedUser(authedUser)))
+        const {userID} = this.state
+        if(userID !== ''){
+            this.props.dispatch(authenticateUser(userID))
+            this.props.history.push('/')
+        }
     }
 
     render() {
         
         const {usersObjtoArr} = this.props
-        
+        console.log(usersObjtoArr)
+
+        const {userID} = this.state
+
         return(
-            <div>
-                <Formik
-                    initialValues={{
-                        select: 'none',
-                    }}
-                    onSubmit={this.handleSubmit}
-                    render={({submitForm, isSubmitting}) => (
-                        <Form>
-                            <Box margin={1}>
-                                <Field
-                                    component={Select}
-                                    type="text"
-                                    name="select"
-                                    label="Select"
-                                    select
-                                    variant="standard"
-                                    helperText="Please select user"
-                                    margin="normal"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                >
+                        <form onSubmit={this.handleSubmit}>
+                            <div>
+                                <select value={userID} onChange={this.handleChange}>
                                     {usersObjtoArr.map((user) => (
-                                        <MenuItem key={user.id} value={user.id}>
-                                            <div>
-                                                <Avatar  src={user.avatarURL} alt= {user.name} />
-                                            </div>
-                                            <div>
-                                                {user.name}
-                                            </div>
-                                        </MenuItem>
+                                        <option key={user.userID} value={user.userID}>
+                                                {user.userName}  
+                                        </option>
                                         ))}
-                                </Field>
-                            </Box>
-                            <Box margin={1}>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    disabled={isSubmitting}
-                                    onClick={submitForm}
-                                >
-                                    Sign In
-                                </Button>
-                            </Box>
-                        </Form>
-                    )}
-                >
-                </Formik>
-            </div>
+                                </select>
+                            </div>
+                            <button type="submit">Sign in</button>
+                        </form>                   
         )
     }
 }
 
-function mapStateToProps({users}){
+
+function mapStateToProps({users, authedUser}){
+    let userProps = []
+
+    Object.entries(users).forEach(([key, value]) =>
+        userProps.push({
+            userID: value.id,
+            userName: value.name
+        })
+    )
     return{
-        usersObjtoArr: Object.values(users),
+        usersObjtoArr: userProps,
+        authedUser
     }
 }
 
@@ -97,4 +71,6 @@ LoginForm.propTypes = {
     onLoading: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps)(LoginForm)
+
+
+export default withRouter(connect(mapStateToProps)(LoginForm))

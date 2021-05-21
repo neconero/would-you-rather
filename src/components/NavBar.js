@@ -1,134 +1,163 @@
-import React, {Fragment, Component} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import isMobileHOC from '../hooks/Styles'
 import{
         AppBar, 
-        Toolbar, 
-        IconButton, 
-        Button, 
+        Toolbar,  
+        Tabs,
+        Tab, 
         Typography,
-        Menu,
-        MenuItem,
         makeStyles,
         Avatar,   
     } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
+import {RiGameLine,RiHome4Fill} from 'react-icons/ri'
+import {GiVote, GiPodiumWinner} from 'react-icons/gi'
+import {FiLogOut} from 'react-icons/fi'
 import {setAuthedUser} from '../actions/authedUser'
-import {withRouter} from 'react-router-dom'
+import LoginPage from './LoginPage'
+import PropTypes from 'prop-types'
+
 
 class NavBar extends Component {
 
     state={
-        anchorEl: null
+        anchorEl: 0
     }
 
-    handleMenu = (e) => {
-        const anchorEl = e.currentTarget
+    handleLogout = (e) => {
+        e.preventDefault()
+        this.props.dispatch(setAuthedUser(''))
+        this.props.history.push('/login')
+    }
+
+    handleTabClick = (e, value) => {
+        
         this.setState(() => ({
-            anchorEl
+            anchorEl: value
         }))
     }
     
     render() {
-        const {authedUser, users, isMobileHOC} = this.props
-        const classes = useStyles
-        const open = Boolean(this.state.anchorEl)
+        const {toolbar,logo, root} = useStyles
+        const {authedUser, users} = this.props
         return (
-            <div>
-                <AppBar position='static'>
-                    <Toolbar>
-                        <Typography variant='h6' style={{flexGrow: 1}}>Game</Typography>
-                        {isMobileHOC ? (
-                            <Fragment>
-                                <IconButton
-                                    edge='start'
-                                    className={classes.menuButton}
-                                    color='inherit'
-                                    aria-label='menu'
-                                    onClick={this.handleMenu}
-                                >
-                                    <MenuIcon />
-                                </IconButton>
-                                <Menu
-                                    id='menu'
-                                    anchorEl={this.state.anchorEl}
-                                    anchorOrigin={{
-                                        horizontal: 'right',
-                                        vertical: 'top'
-                                    }}
-                                    transformOrigin={{
-                                        horizontal: 'right',
-                                        vertical: 'top',
-                                    }}
-                                    keepMounted
-                                    open={open}
-                                    onClose={this.handleClose}
-                                >
-                                </Menu>
-                            </Fragment>
-                        ) : (
-                            <div className={classes.headerOptions}>
-                                <Button
-                                    color='inherit'
-                                >
-                                    Home
-                                </Button>
-                                <Button
-                                    color='inherit'
-                                >
-                                    NewPoll
-                                </Button>
-                                <Button
-                                    color='inherit'
-                                >
-                                    LeaderBoard
-                                </Button>
-                                <Avatar
-                                    src={users[authedUser].avatarURL}
-                                    alt={`Avatar of ${users[authedUser].name}`}
-                                    className={classes.avatar}
-                                    color='inherit'
-                                />
-                                <Button
-                                    color='inherit'
-                                >
-                                    Logout
-                                </Button>
-                            </div>
-                        )}
-                        
-                    </Toolbar>
-                </AppBar>
+            <div className={root}>
+                
+                        <AppBar position='static'>
+                            <Toolbar >
+                                <Typography variant='h6' component='h1' className={logo}>
+                                    <RiGameLine />
+                                </Typography>
+                                <div className={toolbar}>
+                                    {authedUser 
+                                        ? (
+                                            <Tabs 
+                                                onChange={this.handleTabClick}  
+                                                value={this.state.anchorEl}
+                                            >
+                                                <NavLink 
+                                                    to='/'
+                                                    activeClassName='is-active'
+                                                    exact={true}
+                                                >
+                                                    <Tab 
+                                                        icon={<RiHome4Fill />} 
+                                                        disableRipple 
+                                                        label='Home'
+                                                    />
+                                                </NavLink>
+                                                <NavLink 
+                                                    to='/add'
+                                                    activeClassName='is-active'
+                                                >
+                                                    <Tab 
+                                                        icon={<GiVote />} 
+                                                        disableRipple 
+                                                        label='NewPoll'
+                                                    />
+                                                </NavLink>
+                                                <NavLink 
+                                                    to='/leaderboard'
+                                                    activeClassName='is-active'
+                                                >
+                                                    <Tab 
+                                                        icon={<GiPodiumWinner />} 
+                                                        disableRipple 
+                                                        label='LeaderBoard'
+                                                    />
+                                                </NavLink>
+                                                <Link to='/login'>
+                                                    <Tab 
+                                                        icon={<FiLogOut />} 
+                                                        disableRipple 
+                                                        label='Logout'
+                                                        onActive={this.handleLogout}
+                                                    />
+                                                </Link>
+                                            </Tabs>
+                                        ) 
+                                        : (
+                                            <Link to='/login'>
+                                                <LoginPage />
+                                            </Link>
+                                        )}    
+                                    
+                                </div>
+                                
+                                
+                            </Toolbar>
+                        </AppBar>
+                    
             </div>
         )
     }
 }
 
+
+
+
 const useStyles = makeStyles((theme) => ({
-    
-    headerOptions: {
-        display: 'flex',
-        flex: 1,
-        justifyContent: 'space-evenly'
-    },
+
+    root: {
+        flexGrow: 1,
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        backgroundColor: theme.palette.background.paper,
+      },
+
+    header: {
+        backgroundColor: "#400CCC",
+        paddingRight: "79px",
+        paddingLeft: "118px",
+      },
+
+      toolbar: {
+        position: 'relative',
+        marginLeft: 'auto',
+        width: '100%',
+      },
+
+    logo: {
+        fontFamily: "Work Sans, sans-serif",
+        fontWeight: 600,
+        color: "#FFFEFE",
+        textAlign: "left",
+      },
+
     menuButton: {
-        marginRight: theme.spacing(2)
+        fontFamily: "Open Sans, sans-serif",
+        fontWeight: 700,
+        size: "18px",
+        marginLeft: "38px",
     },
-      title: {
-        [theme.breakpoints.down("xs")]: {
-          flexGrow: 1
-        }
-      },
-      avatar: {
-        display: 'flex',
-        '& > *': {
-          
-          width: theme.spacing(3),
-          height: theme.spacing(3),
-        },
-      },
+      
 }))
+
+NavBar.propTypes = {
+    authedUser: PropTypes.object.isRequired,
+    users: PropTypes.object.isRequired,
+}
 
 function mapStateToProps({authedUser, users}){
     return{

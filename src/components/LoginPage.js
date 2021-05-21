@@ -23,7 +23,7 @@ class LoginPage extends Component {
                     </Grid>
                     <Divider />
                     <Grid item xs={12}>
-                        <Avatar  src={SiElectron} alt= "electron" />
+                        <SiElectron />
                     </Grid>
                     <Grid item xs={12}>
                     <Typography align="center" variant="h5">Sign in</Typography>
