@@ -20,28 +20,47 @@ class QHomeTab extends Component {
 
 function mapStateToProps({authedUser, users, questions}, {id}){
     
-    const answered = Object.entries(questions).reduce((acc, curr) => {
-        const [, questionValue] = curr
-        for(const [key, value] of Object.entries(questionValue)){
-            const {id, author, timestamp} = questionValue
-
-            if(key.toLowerCase().startsWith('option')){
-                if(value.votes.includes(authedUser) && !acc.some(a => id === a.id)){
-                    const {name, avatarURL, id: username} = users[author]
-                    acc.push({id, author: {name, avatarURL, username}, timestamp, value: value.text})
+    const { answered, unanswered } = Object.entries(questions).reduce((acc, curr) => {
+        const [questionKey, questionValue] = curr
+        let answeredKeys = []
+        let unansweredKeys = {}
+        for (const [key, value] of Object.entries(questionValue)) {
+            const { id, author, timestamp } = questionValue
+    
+            if (key.toLowerCase().startsWith('option')) {
+                if (value.votes.includes(name)) {
+                    if (!acc.answered.some(a => id === a.id)) {
+                        answeredKeys.push(id)
+                        acc.answered.push({ id, author, timestamp, value: value.text })
+                    }
+                } else {
+                    unanswered[id] = { id, author, timestamp, value: value.text }
                 }
             }
         }
-        return acc        
-    }, [])
-
-
-    console.log(answered)
+    
+        if (answeredKeys.length) {
+            answeredKeys.forEach(ak => {
+                if (unanswered[ak]) delete unanswered[ak]
+            })
+    
+        }
+    
+    
+    
+        if (Object.keys(unanswered).length) {
+            acc.unanswered.push(Object.values(unanswered)[0])
+        }
+    
+    
+        return acc
+    }, { answered: [], unanswered: [] })
 
 
     return {
         authedUser,
-        answered
+        answered,
+        unanswered
         
     }
 }
