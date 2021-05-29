@@ -1,19 +1,252 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*, ::before, ::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  color: #252525;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
 }
+
+main{
+  min-height: 100vh;
+  background: linear-gradient(to right top, #65dfc9, #6cdbeb)
+}
+
+section{
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px;
+}
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-group {
+  position: relative;
+  display: flex;
+}
+
+header ul li  {
+  display: inline-block;
+  color: #333;
+  font-weight: 400;
+  margin-left: 40px
+}
+
+.glass{
+  background: white;
+  min-height: 80vh;
+  width: 60%;
+  background: linear-gradient(
+    to right bottom, 
+    rgba(255,255,255,0.7),
+    rgba(255,255,255,0.3));
+  border-radius: 2rem;
+  z-index: 2;
+  backdrop-filter: blur(2rem);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.circle1,
+.circle2{
+  background: white;
+  background: linear-gradient(
+    to right bottom, 
+    rgba(255,255,255, 0.8),
+    rgba(255,255,255,0.3));
+  height: 15rem;
+  width: 15rem;
+  position: absolute;
+  border-radius: 50%;  
+}
+
+.circle1{
+  top: 7%;
+  right: 15%;
+}
+
+.circle2{
+  bottom: 0.5%;
+  left: 15%
+}
+
+.login-form {
+  width: 25rem;
+  height: 28rem;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, .37);
+  border-radius: 30px;
+  border-left: 1px solid rgba(255, 255, 255, .3);
+  border-top: 1px solid rgba(255, 255, 255, .3)
+}
+
+h4{
+  font-size: 50px;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+  letter-spacing: 3px;
+  margin-bottom: 6%;
+  opacity: .7;
+}
+
+.login-select{
+  width: 60%;
+  margin: 5% auto;
+  margin-top: 40%;
+  margin-bottom: 8%;
+  border: none;
+  outline: none;
+}
+
+.user-card{
+  box-shadow: 6px 6px 20px 
+    rgba(122, 122, 122, 0.2);
+  display: flex;
+  
+  border-radius: 1rem;
+  background: linear-gradient(to left top, 
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.2));
+  margin: 2rem 0rem;
+  padding: 2rem;
+}
+
+ .avatar{
+  transform: translateX(-4rem);
+  position: relative;
+}
+
+.avatar-img {
+  margin: 10px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.question-tease{
+  padding: 0 20px 0 35px;
+  margin-left: 20px;
+}
+
+.question-tease p{
+  display: block;
+  color: #4e4a67;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-size: 10px;
+  text-align: justify;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 500px;
+  height: 700px;
+  margin: 50px auto 50px;
+  border: 1px solid rgba(0, 0, 0, 0.274);
+  padding: 10px;
+}
+
+.bloc-tabs {
+  display: flex;
+}
+
+.tabs {
+  padding: 15px;
+  text-align: center;
+  width: 50%;
+  background: rgba(128, 128, 128, 0.075);
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.274);
+  box-sizing: content-box;
+  position: relative;
+  outline: none;
+}
+.tabs:not(:last-child){
+  border-right: 1px solid rgba(0, 0, 0, 0.274);
+}
+
+.active-tabs  {
+  background: white;
+  border-bottom: 1px solid transparent;
+}
+
+.active-tabs::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% + 2px);
+  height: 5px;
+  background: rgb(88, 147, 241);
+}
+
+
+
+.log-btn {
+  width: 50%;
+  margin: 3% auto;
+  color:#f1f1f1;
+  font-size: 20px;
+  opacity: .8;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 30px;
+  border: none;
+  outline: none;
+  border-radius: 20px;text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+.content-tabs {
+  flex-grow : 1;
+  overflow: auto;
+}
+.content {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.content h2 {
+  padding: 0px 0 5px 0px;
+}
+.content hr {
+  width: 100px;
+  height: 2px;
+  background: #222;
+  margin-bottom: 5px;
+}
+.content p {
+  width: 100%;
+  height: 100%;
+}
+.active-content {
+  display: block;
+}
+
 
 a {
   text-decoration: none;
   color: #252525;
-}
-
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 10px;
 }
 
 .btn {
@@ -68,11 +301,7 @@ li {
   text-decoration: none;
 }
 
-.avatar {
-  height: 50px;
-  border-radius: 25px;
-  margin: 10px;
-}
+
 
 .login {
   width: 100%;

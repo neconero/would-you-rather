@@ -1,9 +1,13 @@
 import React, { Component} from 'react'
+import NavBar from './NavBar'
 
 class NewPoll extends Component {
     render() {
         return (
-            <div>NewPoll</div>
+            <div>
+                <NavBar />
+                NewPoll
+            </div>
         )
     }
 }

@@ -15,6 +15,7 @@ class LoginPage extends Component {
 
     render() {
         return(
+            <div>
             <Fragment>
                 <Grid container spacing={7} direction="column" justify="center" align="center">
                     <Grid item xs={12}>
@@ -26,14 +27,12 @@ class LoginPage extends Component {
                         <SiElectron />
                     </Grid>
                     <Grid item xs={12}>
-                    <Typography align="center" variant="h5">Sign in</Typography>
-                    </Grid>
-                    <Grid item xs={12}>
                         <LoginForm onLoading={this.handleLoading}/>
                     </Grid>
                     
                 </Grid>
             </Fragment>
+            </div>
         )
     }
 }

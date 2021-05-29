@@ -23,7 +23,7 @@ class LoginForm extends Component{
         const {userID} = this.state
         if(userID !== ''){
             this.props.dispatch(authenticateUser(userID))
-            this.props.history.push('/')
+            this.props.history.push('/home')
         }
     }
 
@@ -35,9 +35,10 @@ class LoginForm extends Component{
         const {userID} = this.state
 
         return(
-                        <form onSubmit={this.handleSubmit}>
+                        <form className="login-form" onSubmit={this.handleSubmit}>
+                            <h4>Sign in</h4>
                             <div>
-                                <select value={userID} onChange={this.handleChange}>
+                                <select className="login-select" value={userID} onChange={this.handleChange}>
                                     {usersObjtoArr.map((user) => (
                                         <option key={user.userID} value={user.userID}>
                                                 {user.userName}  
@@ -45,7 +46,7 @@ class LoginForm extends Component{
                                         ))}
                                 </select>
                             </div>
-                            <button type="submit">Sign in</button>
+                            <button type="submit" className="log-btn">Log in</button>
                         </form>                   
         )
     }

@@ -1,12 +1,12 @@
 import React, { Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {handleInitialData}  from '../actions/shared'
-import HomePage from './HomePage'
 import LeaderBoard from './LeaderBoard'
-import NavBar from './NavBar'
+import Homepage from './Homepage'
 import LoginPage from './LoginPage'
 import NotFoundPage from './NotFoundPage'
 import NewPoll from './NewPoll'
+import Poll from './Poll'
 import {Route, Switch,BrowserRouter as Router} from 'react-router-dom'
 
 
@@ -18,31 +18,20 @@ class App extends Component{
   render() {
     const {authedUser} = this.props
     return (
-      <Router>
-        <div className="App">
-          {authedUser == null 
-            ? (
-              <Route render={() => (
-                  <LoginPage />
-              )} />
-            )
-            : (
-              <Fragment>
-                <NavBar />
                 <div>
-                  <Switch>
-                    <Route  path='/' component={HomePage} exact={true} />
-                    <Route path='/add' component={NewPoll} />
-                    <Route path='/leaderboard' component={LeaderBoard} />
-                    <Route component={NotFoundPage} />
-                  </Switch>
+                  <Router>
+                    <div> 
+                      <Switch>
+                        <Route path='/' exact component={LoginPage} />
+                        <Route  path='/home' component={Homepage}  />
+                        <Route path='/add' component={NewPoll} />
+                        <Route path='/question/:id' component={Poll} />
+                        <Route path='/leaderboard' component={LeaderBoard} />
+                        <Route component={NotFoundPage} />
+                      </Switch>
+                    </div>
+                  </Router>
                 </div>
-              </Fragment>
-            )}
-          
-        </div>
-      </Router>
-      
     )
   }
 }

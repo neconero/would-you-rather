@@ -1,61 +1,51 @@
 import React, { Component} from 'react'
+import Tabs from './Tabs'
 import {connect} from 'react-redux'
-import {formatQuestion} from '../utils/helpers'
+
 
 class QHomeTab extends Component {
     render() {
         const {answered, unanswered} = this.props
-
-        console.log(answered)
-        console.log(unanswered)
-
-        
+    
         return (
-            <div className="question">
-               Romeo 
+            <div className="glass">
+               <Tabs answered={answered} unanswered={unanswered}/>
             </div>
         )
     }
 }
 
-function mapStateToProps({authedUser, users, questions}, {id}){
+function mapStateToProps({authedUser, users, questions}){
     
     const { answered, unanswered } = Object.entries(questions).reduce((acc, curr) => {
-        const [questionKey, questionValue] = curr
-        let answeredKeys = []
-        let unansweredKeys = {}
+        const [, questionValue] = curr
+        let temp = { answered: [], unanswered: [] }
+    
         for (const [key, value] of Object.entries(questionValue)) {
             const { id, author, timestamp } = questionValue
     
             if (key.toLowerCase().startsWith('option')) {
-                if (value.votes.includes(name)) {
+                if (value.votes.includes(authedUser)) {
                     if (!acc.answered.some(a => id === a.id)) {
-                        answeredKeys.push(id)
-                        acc.answered.push({ id, author, timestamp, value: value.text })
+                        temp.answered.push(id)
+                        const {name, avatarURL: avatar, id: username} = users[author]
+                        acc.answered.push({ id, author: {name, avatar, username}, timestamp, value: value.text })
                     }
                 } else {
-                    unanswered[id] = { id, author, timestamp, value: value.text }
+                    if (!temp.unanswered.some(a => id === a.id)) {
+                        const {name, avatarURL: avatar, id: username} = users[author]
+                        temp.unanswered.push({ id, author: {name, avatar, username}, timestamp, value: value.text })
+                    }
                 }
             }
         }
     
-        if (answeredKeys.length) {
-            answeredKeys.forEach(ak => {
-                if (unanswered[ak]) delete unanswered[ak]
-            })
-    
-        }
-    
-    
-    
-        if (Object.keys(unanswered).length) {
-            acc.unanswered.push(Object.values(unanswered)[0])
-        }
+        temp.unanswered.forEach(ua => !temp.answered.includes(ua.id) && acc.unanswered.push(ua))
     
     
         return acc
     }, { answered: [], unanswered: [] })
-
+    
 
     return {
         authedUser,

@@ -53,11 +53,12 @@ class NavBar extends Component {
                                     {authedUser 
                                         ? (
                                             <Tabs 
-                                                onChange={this.handleTabClick}  
+                                                onChange={this.handleTabClick} 
+                                                indicatorColor='secondary' 
                                                 value={this.state.anchorEl}
                                             >
                                                 <NavLink 
-                                                    to='/'
+                                                    to='/home'
                                                     activeClassName='is-active'
                                                     exact={true}
                                                 >
