@@ -8,11 +8,17 @@ export function receiveUsers(users){
     }
 }
 
-export function addAnswerToUser({questionID, authedUser, answer}){
+export function addAnswerToUser(questionID, authedUser, answer){
     return{
         type: ADD_ANSWER_TO_USER,
         id: questionID,
         authedUser,
         answer
+    }
+}
+export function handleUserAddition(qid, answer){
+    return (dispatch, getState) => {
+        const { authedUser} = getState()
+        dispatch(addAnswerToUser(qid, authedUser, answer))
     }
 }

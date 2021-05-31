@@ -6,26 +6,30 @@ import {withRouter} from 'react-router-dom'
 
 class Poll extends Component{
     state={
-        selectedOption: '',
-        selected: false
+        selectedOption: ''
     }
 
-    onChange = (event) => {
+    handleOptionChange = (event) => {
+        const value = event.target.value
         this.setState({
-            selected: !this.state.selected,
-            selectedOption: event.target.value
+            selectedOption: value,
+            selected: ''
         })
     }
 
     handleSubmit = (event) => {
         event.preventDefault()
 
-        const {dispatch, question, authedUser, history} = this.props
+        const {dispatch,history} = this.props
+        const {id} = this.props.match.params
         const {selectedOption} = this.state
-        const {id} = question
 
-        dispatch(handleAnsweringQuestion(id, authedUser, selectedOption ))
-        history.push(`/results/${id}`)
+        
+        
+
+
+        dispatch(handleAnsweringQuestion(id,  selectedOption))
+        history.push(`/result/${id}`)
     }
 
     render() {
@@ -36,6 +40,7 @@ class Poll extends Component{
         console.log(this.props.question)
 
         const {name, avatar, optionOne, optionTwo} = this.props.question
+        const {selectedOption} = this.state
 
         return (
             <div className='poll'>
@@ -53,9 +58,9 @@ class Poll extends Component{
                                 <label>
                                     <input 
                                         type="radio"
-                                        value={optionOne.text}
-                                        onClick={this.onChange}
-                                        checked={this.state.selected}
+                                        value="optionOne"
+                                        onChange={this.handleOptionChange}
+                                        checked={selectedOption === "optionOne"}
                                     />
                                     {optionOne.text}
                                 </label>
@@ -64,9 +69,9 @@ class Poll extends Component{
                                 <label>
                                     <input 
                                         type="radio"
-                                        value={optionTwo.text}
-                                        onClick={this.onChange}
-                                        checked={this.state.selected}
+                                        value="optionTwo"
+                                        onChange={this.handleOptionChange}
+                                        checked={selectedOption === "optionTwo"}
                                     />
                                     {optionTwo.text}
                                 </label>
@@ -74,7 +79,7 @@ class Poll extends Component{
                             <button
                                 className="btn"
                                 type="submit"
-                                disabled={this.state.selected}
+                                disabled={!selectedOption}
                             >
                                 Submit
                             </button>
@@ -90,13 +95,14 @@ function mapStateToProps({authedUser, users, questions}, props){
     const {id} = props.match.params
     const question = questions[id]
 
-    console.log(id)
+    
 
     return{
         authedUser,
         question: question
                 ? formatQuestion(question, users[question.author], authedUser)
-                : null
+                : null,
+        
     }
 }
 

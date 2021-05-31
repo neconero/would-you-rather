@@ -45,7 +45,7 @@ let users = {
       },
       optionTwo: {
         votes: [],
-        text: 'have horrible long term memory'
+        text: 'Complete my would you rather'
       }
     },
     "6ni6ok3ym7mf1p33lnez": {
@@ -151,12 +151,16 @@ let users = {
     return new Promise((res, rej) => {
       const authedUser = question.author;
       const formattedQuestion = formatQuestion(question)
+
+      
   
       setTimeout(() => {
         questions = {
           ...questions,
           [formattedQuestion.id]: formattedQuestion
         }
+
+        
         
         users = {
           ...users,
@@ -172,7 +176,12 @@ let users = {
   }
   
   export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
+
+    console.log(authedUser)
+    console.log(answer)
+    console.log(qid)
     return new Promise((res, rej) => {
+      console.log(qid)
       setTimeout(() => {
         users = {
           ...users,

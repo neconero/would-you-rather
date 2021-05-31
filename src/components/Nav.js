@@ -13,7 +13,7 @@ class Nav extends Component {
         return(
             <header>
                 <RiGameLine />
-                <ul>
+                <ul className="list-group">
                     <li>Home</li>
                     <li>NewPoll</li>
                     <li>LeaderBoard</li>

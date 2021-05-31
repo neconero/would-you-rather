@@ -6,6 +6,7 @@ import Homepage from './Homepage'
 import LoginPage from './LoginPage'
 import NotFoundPage from './NotFoundPage'
 import NewPoll from './NewPoll'
+import Result from './Result'
 import Poll from './Poll'
 import {Route, Switch,BrowserRouter as Router} from 'react-router-dom'
 
@@ -26,6 +27,7 @@ class App extends Component{
                         <Route  path='/home' component={Homepage}  />
                         <Route path='/add' component={NewPoll} />
                         <Route path='/question/:id' component={Poll} />
+                        <Route path='/result/:id' component={Result} />
                         <Route path='/leaderboard' component={LeaderBoard} />
                         <Route component={NotFoundPage} />
                       </Switch>

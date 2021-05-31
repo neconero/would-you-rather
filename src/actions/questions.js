@@ -1,5 +1,5 @@
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-export const ANSWER_QUESTIONS = 'ANSWER_QUESTIONS'
+export const ANSWER_QUESTION = 'ANSWER_QUESTION'
 
 export function receiveQuestions (questions) {
     return {
@@ -8,10 +8,10 @@ export function receiveQuestions (questions) {
     }
 }
 
-export function answerQuestion ({questionID, authedUser, answer}){
+export function answerQuestion (qid, authedUser, answer){
     return{
-        type: ANSWER_QUESTIONS,
-        id: questionID,
+        type: ANSWER_QUESTION,
+        qid,
         authedUser,
         answer
     }
