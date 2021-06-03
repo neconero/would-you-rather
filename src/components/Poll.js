@@ -20,13 +20,8 @@ class Poll extends Component{
     handleSubmit = (event) => {
         event.preventDefault()
 
-        const {dispatch,history} = this.props
-        const {id} = this.props.match.params
+        const {dispatch,history, id} = this.props
         const {selectedOption} = this.state
-
-        
-        
-
 
         dispatch(handleAnsweringQuestion(id,  selectedOption))
         history.push(`/result/${id}`)
@@ -102,7 +97,7 @@ function mapStateToProps({authedUser, users, questions}, props){
         question: question
                 ? formatQuestion(question, users[question.author], authedUser)
                 : null,
-        
+        id
     }
 }
 

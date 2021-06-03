@@ -1,27 +1,68 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
-import {Link, NavLink} from 'react-router-dom'
-import {RiGameLine,RiHome4Fill} from 'react-icons/ri'
-import {GiVote, GiPodiumWinner} from 'react-icons/gi'
-import {FiLogOut} from 'react-icons/fi'
-import {authenticateUser} from '../actions/shared'
-import LoginPage from './LoginPage'
+import {NavLink} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-class Nav extends Component {
+
+
+class Nav extends React.Component {
+
     render() {
+        const {authedUser, name, avatarURL} = this.props
         return(
             <header>
-                <RiGameLine />
+                
                 <ul className="list-group">
-                    <li>Home</li>
-                    <li>NewPoll</li>
-                    <li>LeaderBoard</li>
-                    <li>Logout</li>
+                    
+                    <li>
+                        <NavLink to='/home' exact activeClassName="active">
+                            Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/add' exact activeClassName="active">
+                            NewPoll
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/leaderboard' exact activeClassName="active">
+                            LeaderBoard
+                        </NavLink>
+                    </li> 
+                    {authedUser && (
+                        <ul className="list-group">
+                            <li>
+                                <img 
+                                    src={avatarURL} 
+                                    alt={`Avatar of ${name}`} 
+                                    className='avatarURL'
+                                />
+                                <span>{`Hello, ${name}`}</span>
+                            </li>
+                            <li>
+                                <NavLink to='/' exact activeClassName="active">
+                                    Logout
+                                </NavLink>
+                            </li>
+                        </ul>  
+                    )}  
                 </ul>
+                
             </header>
         )
+    }          
+}
+
+function mapStateToProps({authedUser, users}){
+    const user = users[authedUser]
+    
+    const{name, avatarURL} = user
+    return {
+        authedUser,
+        name,
+        avatarURL
     }
 }
 
-export default Nav
+export default connect(mapStateToProps)(Nav)
+

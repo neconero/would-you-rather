@@ -139,6 +139,12 @@ h4{
   border-radius: 50px;
 }
 
+.avatarURL {
+  margin: 10px;
+  height: 40px;
+  border-radius: 20px;
+}
+
 .question-tease{
   padding: 0 20px 0 35px;
   margin-left: 20px;

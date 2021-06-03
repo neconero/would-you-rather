@@ -1,5 +1,6 @@
 export const RECEIVE_USERS = 'RECEIVE_USERS'
 export const ADD_ANSWER_TO_USER = 'ADD_ANSWER_TO_USER'
+export const ADD_QUESTION_TO_USER = 'ADD_QUESTION_TO_USER'
 
 export function receiveUsers(users){
     return{
@@ -16,9 +17,24 @@ export function addAnswerToUser(questionID, authedUser, answer){
         answer
     }
 }
+
 export function handleUserAddition(qid, answer){
     return (dispatch, getState) => {
         const { authedUser} = getState()
         dispatch(addAnswerToUser(qid, authedUser, answer))
     }
 }
+
+export function addQuestionToUser(question){
+    return{
+        type: ADD_QUESTION_TO_USER,
+        question,
+    }
+}
+
+export function handleQuestIdToUser(question){
+    return(dispatch) => {    
+        dispatch(addQuestionToUser(question))
+    }
+}
+
