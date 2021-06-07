@@ -1,6 +1,5 @@
 import React, { Component} from 'react'
 import UserCard from './UserCard'
-import {Redirect} from 'react-router-dom'
 import '../index.css'
 
 class Tabs extends Component {

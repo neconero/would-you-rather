@@ -1,5 +1,4 @@
-import React, { Component, Fragment} from 'react'
-import {connect} from 'react-redux'
+import React, { Component} from 'react'
 import {handleInitialData}  from '../actions/shared'
 import LeaderBoard from './LeaderBoard'
 import Homepage from './Homepage'
@@ -8,6 +7,7 @@ import NotFoundPage from './NotFoundPage'
 import NewPoll from './NewPoll'
 import Result from './Result'
 import Poll from './Poll'
+import {connect} from 'react-redux'
 import {Route, Switch,BrowserRouter as Router} from 'react-router-dom'
 
 
@@ -17,7 +17,6 @@ class App extends Component{
     this.props.dispatch(handleInitialData())
   }
   render() {
-    const {authedUser} = this.props
     return (
                 <div>
                   <Router>
@@ -38,10 +37,8 @@ class App extends Component{
   }
 }
 
-function mapStateToProps({authedUser}){
-  return {
-    authedUser
-  }
+function mapStateToProps(){
+
 }
 
 export default connect(mapStateToProps)(App);

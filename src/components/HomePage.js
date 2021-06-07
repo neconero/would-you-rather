@@ -1,7 +1,7 @@
 import React, { Component} from 'react'
 import {connect} from 'react-redux'
 import QHomeTab from './QHomeTab'
-import NavBar from './NavBar'
+
 import Nav from './Nav'
 
 class HomePage extends Component {
@@ -14,7 +14,7 @@ class HomePage extends Component {
         
         return (
             <div>
-                <main>
+                <main className='home'>
                     <section >
                         <Nav />
                         <QHomeTab />     

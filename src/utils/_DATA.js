@@ -152,7 +152,7 @@ let users = {
       const authedUser = question.author;
       const formattedQuestion = formatQuestion(question)
 
-      
+      console.log(formattedQuestion)
   
       setTimeout(() => {
         questions = {
@@ -161,7 +161,7 @@ let users = {
         }
 
         
-        
+        console.log(questions)
         users = {
           ...users,
           [authedUser]: {
@@ -169,6 +169,8 @@ let users = {
             questions: users[authedUser].questions.concat([formattedQuestion.id])
           }
         }
+
+        console.log(users)
   
         res(formattedQuestion)
       }, 1000)

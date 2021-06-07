@@ -16,10 +16,12 @@ class QHomeTab extends Component {
 }
 
 function mapStateToProps({ authedUser, users, questions }) {
-
+    console.log(questions)
     const { answered, unanswered } = Object.entries(questions).reduce((acc, curr) => {
         const [, questionValue] = curr
+        console.log(questionValue)
         let temp = { answered: [], unanswered: [] }
+
 
         for (const [key, value] of Object.entries(questionValue)) {
             const { id, author, timestamp } = questionValue

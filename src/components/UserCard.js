@@ -13,8 +13,8 @@ class UserCard extends Component {
         
         if(tab === 1){
             return history.push(`/question/${id}`)
-        }else{
-           return history.push(`/results/${id}`) 
+        }else if(tab === 2){
+           return history.push(`/result/${id}`) 
         }
     }
     render() {
@@ -25,6 +25,7 @@ class UserCard extends Component {
                         <img
                             src={answer.author.avatar}
                             className="avatar-img"
+                            alt={answer.author.name}
                         />
                     </div>
                     <div className="question-tease">

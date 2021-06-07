@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import {Typography, Divider, Grid, Avatar} from '@material-ui/core'
+import {Typography, Divider, Grid} from '@material-ui/core'
 import LoginForm from './LoginForm'
 import { SiElectron } from "react-icons/si"
 
@@ -15,9 +15,8 @@ class LoginPage extends Component {
 
     render() {
         return(
-            <div>
-            <Fragment>
-                <Grid container spacing={7} direction="column" justify="center" align="center">
+            <Fragment >
+                <Grid container spacing={7} direction="column" justify="center" align="center" className='home'>
                     <Grid item xs={12}>
                         <Typography align="center" variant="h6">Welcome to the Would You Rather App!</Typography>
                         <Typography align="center" variant="subtitle1">Please sign in to continue</Typography>
@@ -32,7 +31,6 @@ class LoginPage extends Component {
                     
                 </Grid>
             </Fragment>
-            </div>
         )
     }
 }

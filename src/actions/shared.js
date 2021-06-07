@@ -1,6 +1,6 @@
 import {getInitialData, saveQuestionAnswer, saveQuestion} from '../utils/api'
 import {showLoading, hideLoading} from 'react-redux-loading'
-import {receiveUsers, handleUserAddition} from '../actions/users'
+import {receiveUsers, handleUserAddition, handleQuestIdToUser} from '../actions/users'
 import {receiveQuestions, answerQuestion, addQuestion} from '../actions/questions'
 import {setAuthedUser}  from '../actions/authedUser'
 
@@ -41,13 +41,20 @@ export function handleAnsweringQuestion(qid,  answer){
 }
 
 //async action creator for add question
-export function handleAddQuestion(optionOne, optionTwo) {
+export function handleAddQuestion(optionOneText, optionTwoText) {
     return(dispatch, getState) => {
-        const {authedUser} = getState()
+        const {authedUser, questions} = getState()
 
-        const question = {optionOne, optionTwo, author: authedUser}
+        console.log(optionOneText, optionTwoText)
+
+        const question = {optionOneText, optionTwoText, author: authedUser}
 
         dispatch(showLoading())
         return saveQuestion(question)
+            .then((quest) => {
+                dispatch(addQuestion(quest))
+                dispatch(handleQuestIdToUser(quest))
+            })
+            .then(() => dispatch(hideLoading()))  
     }
 }

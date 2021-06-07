@@ -27,6 +27,8 @@ class NewPoll extends Component {
         e.preventDefault()
         const {optionOne, optionTwo} = this.state
         const {dispatch} = this.props
+
+        console.log(optionOne, optionTwo)
         
         dispatch(handleAddQuestion(optionOne, optionTwo))
 
@@ -44,34 +46,45 @@ class NewPoll extends Component {
         }
         return (
             <div>
-                <Nav />
-                <div>
-                    <h2>Create New Question</h2>
-                    <h5>Complete the questions:</h5>
-                    <h2>Would you rather ...</h2>
-                    <form className='new-poll' onSubmit={this.handleSubmit}>
-                        <input 
-                            placeholder='Enter Option One Text Here'
-                            type='text'
-                            value={optionOne}
-                            onChange={this.handleChange1}
-                        />
-                        <span>OR</span>
-                        <input
-                            placeholder='Enter Option Two Text Here'
-                            type='text'
-                            value={optionTwo}
-                            onChange={this.handleChange2} 
-                        />
-                        <button
-                            className='btn newquestion'
-                            type='submit'
-                            disabled={optionOne === '' || optionTwo === ''}
-                        >
-                            Submit
-                        </button>
-                    </form>
-                </div>
+                <main className='home'> 
+                    <section>
+                        <Nav />
+                        <div className='glass'>
+                            <div className='poll-container'>
+                                <h2>Create New Question</h2>
+                                <div className='poll-intro'>
+                                    <h6>Complete the questions:</h6>
+                                    <h4>Would you rather ...</h4>
+                                </div>
+                                
+                                <form className='new-poll' onSubmit={this.handleSubmit}>
+                                    <input 
+                                        placeholder='Enter Option One Text Here'
+                                        type='text'
+                                        value={optionOne}
+                                        onChange={this.handleChange1}
+                                    />
+                                    <p className='message'>OR</p>
+                                    <input
+                                        placeholder='Enter Option Two Text Here'
+                                        type='text'
+                                        value={optionTwo}
+                                        onChange={this.handleChange2} 
+                                    />
+                                    <button
+                                        className='btn newquestion'
+                                        type='submit'
+                                        disabled={optionOne === '' || optionTwo === ''}
+                                    >
+                                        Submit
+                                    </button>
+                                </form>
+                            </div>   
+                        </div>
+                    </section>
+                </main>
+                <div className="circle1"></div>
+                <div className="circle2"></div>   
             </div>
         )
     }

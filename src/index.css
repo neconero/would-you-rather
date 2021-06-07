@@ -8,7 +8,7 @@
   cursor: pointer;
 }
 
-main{
+.home{
   min-height: 100vh;
   background: linear-gradient(to right top, #65dfc9, #6cdbeb)
 }
@@ -18,9 +18,17 @@ section{
   width: 100%;
   min-height: 100vh;
   display: flex;
-  justify-content: space-between;
+  justify-content:center;
   align-items: center;
   padding: 100px;
+}
+
+.main-leader{
+  min-height: 100vh;
+  background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+  display: flex;
+  align-items: center;
+  justify-content:center;
 }
 
 header {
@@ -30,6 +38,14 @@ header {
   width: 100%;
   padding: 20px 100px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
@@ -59,7 +75,160 @@ header ul li  {
   backdrop-filter: blur(2rem);
   margin-left: auto;
   margin-right: auto;
+  justify-content:space-between;
+  display: flex;
 }
+
+
+.poll{
+  background: white;
+  min-height: 40vh;
+  width: 60%;
+  background: linear-gradient(
+    to right bottom, 
+    rgba(255,255,255,0.7),
+    rgba(255,255,255,0.3));
+  border-radius: 2rem;
+  z-index: 2;
+  backdrop-filter: blur(2rem);
+  justify-content:center;
+  display: flex;
+}
+
+.result{
+  background: white;
+  min-height: 40vh;
+  width: 50%;
+  background: linear-gradient(
+    to right bottom, 
+    rgba(255,255,255,0.7),
+    rgba(255,255,255,0.3));
+  border-radius: 2rem;
+  z-index: 2;
+  backdrop-filter: blur(2rem);
+  justify-content:center;
+  display: flex;
+  
+}
+
+.result img{
+  margin-top: 4rem;
+}
+
+.profile-name {
+  margin: 4rem;
+  flex: 1;
+}
+
+.poll-result{
+  margin: 4rem;
+  flex: 2;
+}
+
+.trophy{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    to right bottom, 
+    rgba(255,255,255,0.7),
+    rgba(255,255,255,0.3));
+  border-radius: 2rem;
+}
+
+.poll-container{
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    to right bottom, 
+    rgba(255,255,255,0.8),
+    rgba(255,255,255,0.5));
+  border-radius: 2rem;
+}
+
+.rank-board{
+  flex: 2;
+  margin: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.message{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+}
+
+.new-poll{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
+
+.poll-intro{
+  margin-top: 2rem;
+  justify-content: flex-start;
+}
+
+.score-card{
+  display: flex;
+  background: linear-gradient(
+    to left top, 
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.5)
+  );
+  padding: 2rem;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 1rem;
+  margin: 2rem 0rem;
+  box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+}
+
+.score-card2{
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(
+    to left top, 
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.5)
+  );
+  box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.poll-tab{
+
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  background: linear-gradient(
+    to left top, 
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.5)
+  );
+  padding: 2rem;
+  justify-content: space-between;
+  border-radius: 1rem;
+  margin: 2rem 0rem;
+  box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+}
+
+.score-details{
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+}
+
+
 
 .circle1,
 .circle2{
@@ -96,7 +265,11 @@ header ul li  {
   border-top: 1px solid rgba(255, 255, 255, .3)
 }
 
-h4{
+.login-form h4{
+  margin-top: 5rem;
+}
+
+h7{
   font-size: 50px;
   text-align: center;
   color: white;
@@ -129,8 +302,8 @@ h4{
 }
 
  .avatar{
-  transform: translateX(-4rem);
   position: relative;
+  flex: 1;
 }
 
 .avatar-img {
@@ -146,15 +319,16 @@ h4{
 }
 
 .question-tease{
-  padding: 0 20px 0 35px;
-  margin-left: 20px;
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .question-tease p{
   display: block;
   color: #4e4a67;
   margin-top: 10px;
-  margin-bottom: 30px;
   font-size: 10px;
   text-align: justify;
 }
@@ -212,7 +386,7 @@ h4{
 .log-btn {
   width: 50%;
   margin: 3% auto;
-  color:#f1f1f1;
+  color: black;
   font-size: 20px;
   opacity: .8;
   background: rgba(255, 255, 255, 0.08);

@@ -1,8 +1,9 @@
-import React, { Component} from 'react'
+import React, { Component, Fragment} from 'react'
 import {formatQuestion} from '../utils/helpers'
 import {handleAnsweringQuestion} from '../actions/shared'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import Nav from './Nav'
 
 class Poll extends Component{
     state={
@@ -13,7 +14,6 @@ class Poll extends Component{
         const value = event.target.value
         this.setState({
             selectedOption: value,
-            selected: ''
         })
     }
 
@@ -38,50 +38,59 @@ class Poll extends Component{
         const {selectedOption} = this.state
 
         return (
-            <div className='poll'>
-                <div className='user-name'>{name} asks</div>
-
-                <div className='poll-info'>
-                    <img src={avatar} alt={`Avatar of ${name}`}  className='avatar'/>
-                
-
-                    <div>
-                        <h2>Would you rather...</h2>
-                    
-                        <form onSubmit={this.handleSubmit}>
-                            <div>
-                                <label>
-                                    <input 
-                                        type="radio"
-                                        value="optionOne"
-                                        onChange={this.handleOptionChange}
-                                        checked={selectedOption === "optionOne"}
-                                    />
-                                    {optionOne.text}
-                                </label>
+            <Fragment >
+                <main className='home'>
+                    <section>
+                        <Nav />
+                        <div className='poll'>
+                            <div className='poll-tab'>
+                                <div className='user-name'>{name} asks</div>
+                                <div className='poll-info'>
+                                    <img src={avatar} alt={`Avatar of ${name}`}  className='avatar-img'/>
+                                    <div>
+                                        <h2>Would you rather...</h2>
+                                    
+                                        <form onSubmit={this.handleSubmit}>
+                                            <div>
+                                                <label>
+                                                    <input 
+                                                        type="radio"
+                                                        value="optionOne"
+                                                        onChange={this.handleOptionChange}
+                                                        checked={selectedOption === "optionOne"}
+                                                    />
+                                                    {optionOne.text}
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label>
+                                                    <input 
+                                                        type="radio"
+                                                        value="optionTwo"
+                                                        onChange={this.handleOptionChange}
+                                                        checked={selectedOption === "optionTwo"}
+                                                    />
+                                                    {optionTwo.text}
+                                                </label>
+                                            </div>
+                                            <button
+                                                className="btn"
+                                                type="submit"
+                                                disabled={!selectedOption}
+                                            >
+                                                Submit
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <label>
-                                    <input 
-                                        type="radio"
-                                        value="optionTwo"
-                                        onChange={this.handleOptionChange}
-                                        checked={selectedOption === "optionTwo"}
-                                    />
-                                    {optionTwo.text}
-                                </label>
-                            </div>
-                            <button
-                                className="btn"
-                                type="submit"
-                                disabled={!selectedOption}
-                            >
-                                Submit
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                            
+                        </div>
+                    </section>    
+                </main>
+                <div className="circle1"></div>
+                <div className="circle2"></div>
+            </Fragment>
         )
     }
 }
