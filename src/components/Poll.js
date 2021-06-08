@@ -29,7 +29,7 @@ class Poll extends Component{
 
     render() {
         if(this.props.authedUser === null){
-            return this.props.history('/login')
+            return this.props.history('/')
         }
 
         console.log(this.props.question)
