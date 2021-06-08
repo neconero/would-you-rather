@@ -43,7 +43,7 @@ export function handleAnsweringQuestion(qid,  answer){
 //async action creator for add question
 export function handleAddQuestion(optionOneText, optionTwoText) {
     return(dispatch, getState) => {
-        const {authedUser, questions} = getState()
+        const {authedUser} = getState()
 
         console.log(optionOneText, optionTwoText)
 

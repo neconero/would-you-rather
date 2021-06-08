@@ -28,7 +28,6 @@ class NewPoll extends Component {
         const {optionOne, optionTwo} = this.state
         const {dispatch} = this.props
 
-        console.log(optionOne, optionTwo)
         
         dispatch(handleAddQuestion(optionOne, optionTwo))
 

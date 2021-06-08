@@ -192,6 +192,10 @@ header ul li  {
   box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
 }
 
+.score-card-border{
+  background-color: #FFFF00;
+}
+
 .score-card2{
   display: flex;
   justify-content: space-between;
@@ -269,15 +273,7 @@ header ul li  {
   margin-top: 5rem;
 }
 
-h7{
-  font-size: 50px;
-  text-align: center;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
-  letter-spacing: 3px;
-  margin-bottom: 6%;
-  opacity: .7;
-}
+
 
 .login-select{
   width: 60%;

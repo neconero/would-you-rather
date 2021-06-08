@@ -3,11 +3,36 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import {connect} from 'react-redux'
 import {formatQuestion} from '../utils/helpers'
 import Nav from './Nav'
+import NotFoundPage from './NotFoundPage'
 
 class Result extends Component {
+
+    componentDidMount(){
+        if(this.props.authedUser === null){
+            return this.props.history.push('/')
+        }
+    }
+    
+    borderColorUserChoice1 = () => {
+        const {authedUser, question} = this.props
+        const {optionOne, optionTwo} = question
+
+        if(optionOne.votes.indexOf(authedUser) !== -1) {
+            return 1
+        }else if(optionTwo.votes.indexOf(authedUser) !== -1) {
+            return 2
+        }
+    }
+
+
     render() {
         const {question} = this.props
+
+        if(question === null ) {
+            return <NotFoundPage />
+        }
         const {optionOne, optionTwo, avatar, name} = question
+
 
         const totalVotes = optionOne.votes.length + optionTwo.votes.length
         const firstOptionVotePercentage = Math.floor(100*(optionOne.votes.length/totalVotes)) 
@@ -24,13 +49,13 @@ class Result extends Component {
                                 </div>  
                                     <div className="poll-result">
                                         <h3>Results</h3>
-                                        <div className='score-card'>
+                                        <div className={`score-card ${(this.borderColorUserChoice1() === 1) && 'score-card-border'}`}>
                                             <p>{`Would you rather  ${optionOne.text}`}</p>
                                             <ProgressBar now={firstOptionVotePercentage} label={`${firstOptionVotePercentage}%`}/>
                                             <p>{`${optionOne.votes.length} out of ${totalVotes}`}</p>
                                         </div>
                                         <br />
-                                        <div className='score-card'>
+                                        <div className={`score-card ${(this.borderColorUserChoice1() === 2) && 'score-card-border'}`}>
                                             <p>{`Would you rather  ${optionTwo.text}`}</p>
                                             <ProgressBar now={secondOptionVotePercentage} label={`${secondOptionVotePercentage}%`}/>
                                             <p>{`${optionTwo.votes.length} out of ${totalVotes}`}</p>
@@ -49,7 +74,7 @@ class Result extends Component {
 
 function mapStateToProps({questions, users, authedUser}, props){
     const {id} = props.match.params
-    console.log(id)
+    
     const question = questions[id]
 
     return{

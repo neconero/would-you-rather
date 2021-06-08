@@ -5,6 +5,11 @@ import {connect} from 'react-redux'
 import Nav from './Nav'
 
 class LeaderBoard extends Component {
+    componentDidMount() {
+        if(this.props.authedUser === null) {
+            this.props.history.push('/')
+        }
+    }
     render() {    
         return(
             <div>
@@ -32,9 +37,10 @@ class LeaderBoard extends Component {
     }
 }
 
-function mapStateToProps({users}){
+function mapStateToProps({users, authedUser}){
     return {
-        usersID : Object.keys(users)
+        usersID : Object.keys(users),
+        authedUser
     }
 }
 

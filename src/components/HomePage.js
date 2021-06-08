@@ -1,7 +1,6 @@
 import React, { Component} from 'react'
 import {connect} from 'react-redux'
 import QHomeTab from './QHomeTab'
-
 import Nav from './Nav'
 
 class HomePage extends Component {
@@ -27,11 +26,9 @@ class HomePage extends Component {
     }
 }
 
-function mapStateToProps({questions, authedUser}) {
+function mapStateToProps({authedUser}) {
     
     return{
-        questionsIds: Object.keys(questions)
-            .sort((a,b)=> questions[b].timestamp - questions[a].timestamp),
         authedUser
     }
 }
