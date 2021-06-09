@@ -38,8 +38,28 @@ class LeaderBoard extends Component {
 }
 
 function mapStateToProps({users, authedUser}){
+    let userID = Object.keys(users)
+    let userArr = users
+
+    const scoreObject =  userID.reduce((acc, user) => {
+        let temp = userArr[user]
+        
+        const {answers, questions} = temp
+
+        let questLength = questions.length
+        
+        let answerArr = Object.keys(answers)
+        let answerLength = answerArr.length
+        
+        temp.score = questLength + answerLength
+
+        acc[temp.id] = temp
+        return acc
+    }, {})
+
     return {
-        usersID : Object.keys(users),
+        usersID : Object.keys(scoreObject)
+            .sort((a, b) => scoreObject[b].score - scoreObject[a].score),
         authedUser
     }
 }
