@@ -5,6 +5,16 @@ import QHomeTab from './QHomeTab'
 import Nav from './Nav'
 
 class Homepage extends Component {
+
+
+
+    
+
+    componentDidUpdate() {
+        console.log(sessionStorage.getItem('authID'))
+        sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser
+          (sessionStorage.getItem('authID')))
+      }
     componentDidMount() {
         if(this.props.authedUser === null) {
             this.props.history.push('/')
