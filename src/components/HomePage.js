@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import QHomeTab from './QHomeTab'
 import Nav from './Nav'
 
-class HomePage extends Component {
+class Homepage extends Component {
     componentDidMount() {
         if(this.props.authedUser === null) {
             this.props.history.push('/')
@@ -33,4 +33,4 @@ function mapStateToProps({authedUser}) {
     }
 }
 
-export default connect(mapStateToProps)(HomePage)
+export default connect(mapStateToProps)(Homepage)
