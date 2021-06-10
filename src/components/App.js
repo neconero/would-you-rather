@@ -47,7 +47,7 @@ class App extends Component{
                     ): (
                       <Fragment>
                         <Switch>
-                          <Route  path='/home' component={Homepage} onEnter={this.isAuthenticated}   />
+                          <Route  path='/home' component={Homepage}   />
                           <Route path='/add' component={NewPoll} />
                           <Route path='/question/:id' component={Poll} />
                           <Route path='/result/:id' component={Result} />
