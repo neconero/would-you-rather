@@ -16,24 +16,20 @@ import {Route, Switch,BrowserRouter as Router} from 'react-router-dom'
 
 class App extends Component{
 
-  componentDidUpdate() {
-    console.log(sessionStorage.getItem('authID'))
-    sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser
-      (sessionStorage.getItem('authID')))
-  }
-
+  
   componentDidMount(){
     if(!sessionStorage.getItem('authID')){
       this.props.dispatch(handleInitialData())
     }else{
-      this.props.dispatch(authenticateUser
-        (sessionStorage.getItem('authID')))
+      this.props.dispatch(authenticateUser(sessionStorage.getItem('authID')))
     }  
   }
 
+
+  
   componentWillUpdate(nextProps, nextState) {
-      sessionStorage.setItem('authID', nextProps.authedUser)
-}
+        sessionStorage.setItem('authID', nextProps.authedUser)
+  }
   
   render() {
     const {authedUser} = this.props

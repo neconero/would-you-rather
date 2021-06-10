@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {NavLink, withRouter} from 'react-router-dom'
 import {authenticateUser} from '../actions/shared'
 
 
@@ -8,13 +8,19 @@ import {authenticateUser} from '../actions/shared'
 
 class Nav extends React.Component {
 
-    componentDidUpdate() {
-        console.log(sessionStorage.getItem('authID'))
-        sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser
-          (sessionStorage.getItem('authID')))
-      }
+    logout = (e) => {
+        e.preventDefault()
+
+        sessionStorage.removeItem('authID')
+        this.props.dispatch(authenticateUser(sessionStorage.getItem('authID')))
+        if(sessionStorage.getItem('authID') === null){
+            sessionStorage.clear()
+            this.props.history.push('/')
+        }
+    }
 
     render() {
+        console.log(this.props)
         const {authedUser, name, avatarURL} = this.props
         
         return(
@@ -48,7 +54,7 @@ class Nav extends React.Component {
                                 <span>{`Hello, ${name}`}</span>
                             </li>
                             <li>
-                                <NavLink to='/' exact activeClassName="active">
+                                <NavLink to='/' exact activeClassName="active" onClick={this.logout}>
                                     Logout
                                 </NavLink>
                             </li>
@@ -62,7 +68,6 @@ class Nav extends React.Component {
 }
 
 function mapStateToProps({authedUser, users}){
-    
     const user = users[authedUser]
     
     const{name, avatarURL} =  user 
@@ -73,5 +78,5 @@ function mapStateToProps({authedUser, users}){
     }
 }
 
-export default connect(mapStateToProps)(Nav)
+export default withRouter(connect(mapStateToProps)(Nav))
 
