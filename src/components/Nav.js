@@ -1,14 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
+import {authenticateUser} from '../actions/shared'
 
 
 
 
 class Nav extends React.Component {
 
+    componentDidUpdate() {
+        console.log(sessionStorage.getItem('authID'))
+        sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser
+          (sessionStorage.getItem('authID')))
+      }
+
     render() {
         const {authedUser, name, avatarURL} = this.props
+        
         return(
             <header>
                 
@@ -54,9 +62,10 @@ class Nav extends React.Component {
 }
 
 function mapStateToProps({authedUser, users}){
+    
     const user = users[authedUser]
     
-    const{name, avatarURL} = user
+    const{name, avatarURL} =  user 
     return {
         authedUser,
         name,

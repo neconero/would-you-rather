@@ -1,14 +1,16 @@
 import React, { Component, Fragment} from 'react'
 import {formatQuestion} from '../utils/helpers'
-import {handleAnsweringQuestion} from '../actions/shared'
+import {handleAnsweringQuestion, authenticateUser} from '../actions/shared'
 import {connect} from 'react-redux'
-import {withRouter} from 'react-router-dom'
 import Nav from './Nav'
+import {withRouter} from 'react-router-dom'
 
 class Poll extends Component{
     state={
         selectedOption: ''
     }
+
+    
 
     handleOptionChange = (event) => {
         const value = event.target.value
@@ -27,6 +29,21 @@ class Poll extends Component{
         history.push(`/result/${id}`)
     }
 
+    componentWillUpdate(prevProps){
+        let authStoreID = localStorage.getItem('authID')
+        if(this.props.authedUser && this.props.authedUser !== authStoreID){
+            window.localStorage.setItem('authID', this.props.authedUser)
+        } 
+    }
+
+    componentWillMount() {
+        let authID = window.localStorage.getItem('authID')
+
+        if(authID){
+            this.props.dispatch(authenticateUser(authID))
+        }
+    }
+
     render() {
         if(this.props.authedUser === null){
             return this.props.history('/')
@@ -40,8 +57,8 @@ class Poll extends Component{
         return (
             <Fragment >
                 <main className='home'>
+                    <Nav />
                     <section>
-                        <Nav />
                         <div className='poll'>
                             <div className='poll-tab'>
                                 <div className='user-name'>{name} asks</div>
