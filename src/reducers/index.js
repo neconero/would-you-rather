@@ -6,5 +6,5 @@ import authedUser from './authedUser'
 export default combineReducers({
     users,
     questions,
-    authedUser
+    authedUser,
 })

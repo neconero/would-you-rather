@@ -2,8 +2,8 @@ import React, { Component, Fragment} from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import {connect} from 'react-redux'
 import {formatQuestion} from '../utils/helpers'
-import Nav from './Nav'
 import NotFoundPage from './NotFoundPage'
+import Nav from './Nav'
 
 class Result extends Component {
 
@@ -41,7 +41,7 @@ class Result extends Component {
             <Fragment>
                 <main className='home'>
                     <section>
-                        <Nav/>
+                        <Nav />
                         <div className='result'>
                                 <div className="profile-name">
                                     <h4>Asked by {name}</h4>

@@ -51,8 +51,8 @@ function mapStateToProps({ authedUser, users, questions }) {
 
     return {
         authedUser,
-        answered,
-        unanswered
+        answered: answered.sort((a, b) => (b.timestamp - a.timestamp)),
+        unanswered: unanswered.sort((a, b) => (b.timestamp - a.timestamp))
 
     }
 }

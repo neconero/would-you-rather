@@ -1,14 +1,43 @@
 import React, { Component} from 'react'
+import {authenticateUser} from '../actions/shared'
 import {connect} from 'react-redux'
 import QHomeTab from './QHomeTab'
 import Nav from './Nav'
 
+
 class HomePage extends Component {
+
+    
+
+    componentDidUpdate() {
+        console.log(sessionStorage.getItem('authID'))
+        sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser
+          (sessionStorage.getItem('authID')))
+      }
     componentDidMount() {
         if(this.props.authedUser === null) {
             this.props.history.push('/')
         }
+
+        window.onbeforeunload = (event) => {
+            const e = event || window.event;
+    
+            e.preventDefault();
+    
+            if(e){
+                e.returnValue = ''
+            }
+            return ''
+        }
+
+        this.props.dispatch(authenticateUser
+            (sessionStorage.getItem('authID')))
     }
+
+    
+
+    
+   
     render() {
         
         return (
@@ -26,8 +55,7 @@ class HomePage extends Component {
     }
 }
 
-function mapStateToProps({authedUser}) {
-    
+function mapStateToProps({authedUser}) {  
     return{
         authedUser
     }

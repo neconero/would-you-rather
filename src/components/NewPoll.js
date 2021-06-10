@@ -37,6 +37,8 @@ class NewPoll extends Component {
             toHome: true
         }))
     }
+
+    
     render() {
         const { optionOne, optionTwo, toHome } = this.state
 
