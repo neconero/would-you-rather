@@ -5,7 +5,7 @@ import QHomeTab from './QHomeTab'
 import Nav from './Nav'
 
 
-class HomePage extends Component {
+class Homepage extends Component {
 
     
 
@@ -61,4 +61,4 @@ function mapStateToProps({authedUser}) {
     }
 }
 
-export default connect(mapStateToProps)(HomePage)
+export default connect(mapStateToProps)(Homepage)
