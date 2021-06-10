@@ -12,6 +12,7 @@ class Nav extends React.Component {
         e.preventDefault()
 
         sessionStorage.removeItem('authID')
+  
         this.props.dispatch(authenticateUser(sessionStorage.getItem('authID')))
         if(sessionStorage.getItem('authID') === null){
             sessionStorage.clear()

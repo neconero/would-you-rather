@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import QHomeTab from './QHomeTab'
 import Nav from './Nav'
 
-class HomePage extends Component {
+class Home extends Component {
 
     componentDidUpdate() {
         console.log(sessionStorage.getItem('authID'))
@@ -53,4 +53,4 @@ function mapStateToProps({authedUser}){
     }
 }
 
-export default connect(mapStateToProps)(HomePage)
+export default connect(mapStateToProps)(Home)
