@@ -4,12 +4,13 @@ import {connect} from 'react-redux'
 import QHomeTab from './QHomeTab'
 import Nav from './Nav'
 
-class Homepage extends Component {
+class HomePage extends Component {
+
     componentDidUpdate() {
         console.log(sessionStorage.getItem('authID'))
-        sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser
-          (sessionStorage.getItem('authID')))
-      }
+        sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser(sessionStorage.getItem('authID')))
+    }
+
     componentDidMount() {
         if(this.props.authedUser === null) {
             this.props.history.push('/')
@@ -43,12 +44,13 @@ class Homepage extends Component {
             </div>
         )
     }
+
 }
 
-function mapStateToProps({authedUser}) {  
-    return{
+function mapStateToProps({authedUser}){
+    return {
         authedUser
     }
 }
 
-export default connect(mapStateToProps)(Homepage)
+export default connect(mapStateToProps)(HomePage)

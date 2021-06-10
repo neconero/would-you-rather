@@ -18,7 +18,12 @@ export function handleInitialData(){
 
 export function authenticateUser(authID){
     return (dispatch) => {
-        dispatch(setAuthedUser(authID))
+        return getInitialData()
+            .then(({users, questions}) => {
+                dispatch(receiveUsers(users))
+                dispatch(receiveQuestions(questions))
+                dispatch(setAuthedUser(authID))
+            }) 
     }
 }
 
