@@ -4,20 +4,7 @@ import {connect} from 'react-redux'
 import QHomeTab from './QHomeTab'
 import Nav from './Nav'
 
-<<<<<<< HEAD
 class Homepage extends Component {
-=======
-
-class HomePage extends Component {
-
-    
-
-    componentDidUpdate() {
-        console.log(sessionStorage.getItem('authID'))
-        sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser
-          (sessionStorage.getItem('authID')))
-      }
->>>>>>> develop
     componentDidMount() {
         if(this.props.authedUser === null) {
             this.props.history.push('/')
