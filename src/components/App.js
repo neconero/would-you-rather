@@ -1,7 +1,7 @@
 import React, { Component, Fragment} from 'react'
 import {handleInitialData, authenticateUser}  from '../actions/shared'
 import LeaderBoard from './LeaderBoard'
-import Homepage from './Homepage'
+import HomePage from './HomePage'
 import LoginPage from './LoginPage'
 import NotFoundPage from './NotFoundPage'
 import NewPoll from './NewPoll'
@@ -16,7 +16,6 @@ import {Route, Switch,BrowserRouter as Router} from 'react-router-dom'
 
 class App extends Component{
 
-  
   componentDidMount(){
     if(!sessionStorage.getItem('authID')){
       this.props.dispatch(handleInitialData())
@@ -24,11 +23,9 @@ class App extends Component{
       this.props.dispatch(authenticateUser(sessionStorage.getItem('authID')))
     }  
   }
-
-
   
   componentWillUpdate(nextProps, nextState) {
-        sessionStorage.setItem('authID', nextProps.authedUser)
+    sessionStorage.setItem('authID', nextProps.authedUser)
   }
   
   render() {
@@ -43,7 +40,7 @@ class App extends Component{
                     ): (
                       <Fragment>
                         <Switch>
-                          <Route  path='/home' component={Homepage}   />
+                          <Route  path='/home' component={HomePage}   />
                           <Route path='/add' component={NewPoll} />
                           <Route path='/question/:id' component={Poll} />
                           <Route path='/result/:id' component={Result} />

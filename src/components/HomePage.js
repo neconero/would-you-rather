@@ -5,9 +5,7 @@ import QHomeTab from './QHomeTab'
 import Nav from './Nav'
 
 
-class Homepage extends Component {
-
-    
+class HomePage extends Component {
 
     componentDidUpdate() {
         console.log(sessionStorage.getItem('authID'))
@@ -33,10 +31,6 @@ class Homepage extends Component {
         this.props.dispatch(authenticateUser
             (sessionStorage.getItem('authID')))
     }
-
-    
-
-    
    
     render() {
         
@@ -61,4 +55,4 @@ function mapStateToProps({authedUser}) {
     }
 }
 
-export default connect(mapStateToProps)(Homepage)
+export default connect(mapStateToProps)(HomePage)
