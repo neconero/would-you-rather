@@ -5,11 +5,6 @@ import QHomeTab from './QHomeTab'
 import Nav from './Nav'
 
 class Homepage extends Component {
-
-
-
-    
-
     componentDidUpdate() {
         console.log(sessionStorage.getItem('authID'))
         sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser
@@ -31,14 +26,8 @@ class Homepage extends Component {
             return ''
         }
 
-        this.props.dispatch(authenticateUser
-            (sessionStorage.getItem('authID')))
     }
 
-    
-
-    
-   
     render() {
         
         return (
