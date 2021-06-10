@@ -1,7 +1,7 @@
 import React, { Component, Fragment} from 'react'
 import {handleInitialData, authenticateUser}  from '../actions/shared'
 import LeaderBoard from './LeaderBoard'
-import Homepage from './Homepage'
+import HomePage from './HomePage'
 import LoginPage from './LoginPage'
 import NotFoundPage from './NotFoundPage'
 import NewPoll from './NewPoll'
@@ -40,7 +40,7 @@ class App extends Component{
                     ): (
                       <Fragment>
                         <Switch>
-                          <Route  path='/home' component={Homepage}   />
+                          <Route  path='/home' component={HomePage}   />
                           <Route path='/add' component={NewPoll} />
                           <Route path='/question/:id' component={Poll} />
                           <Route path='/result/:id' component={Result} />
