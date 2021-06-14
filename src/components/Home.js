@@ -2,15 +2,13 @@ import React, { Component, Fragment} from 'react'
 //import {authenticateUser} from '../actions/shared'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import Tabs from './Tabs'
 import QHomeTab from './QHomeTab'
 //import Nav from './Nav'
 
 class Home extends Component {
 
-    // componentDidUpdate() {
-    //     console.log(sessionStorage.getItem('authID'))
-    //     sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser(sessionStorage.getItem('authID')))
-    // }
+    
 
     componentDidMount() {
         if(this.props.authedUser === null) {
@@ -31,25 +29,57 @@ class Home extends Component {
     }
 
     render() {
-        
+        const { answered, unanswered } = this.props
         return (
             <Fragment>
-                <main className='home'>
-                    <section >
-                        <QHomeTab />     
-                    </section>
-                    <div className="circle1"></div>
-                    <div className="circle2"></div>
-                </main>     
+                <div className="glass">
+                    <Tabs answered={answered} unanswered={unanswered} />
+                </div>      
             </Fragment>
         )
     }
 
 }
 
-function mapStateToProps({authedUser}){
+function mapStateToProps({ authedUser, users, questions }) {
+    console.log(questions)
+    const { answered, unanswered } = Object.entries(questions).reduce((acc, curr) => {
+        const [, questionValue] = curr
+        console.log(questionValue)
+        let temp = { answered: [], unanswered: [] }
+
+
+        for (const [key, value] of Object.entries(questionValue)) {
+            const { id, author, timestamp } = questionValue
+
+            if (key.toLowerCase().startsWith('option')) {
+                if (value.votes.includes(authedUser)) {
+                    if (!acc.answered.some(a => id === a.id)) {
+                        temp.answered.push(id)
+                        const { name, avatarURL: avatar, id: username } = users[author]
+                        acc.answered.push({ id, author: { name, avatar, username }, timestamp, value: value.text })
+                    }
+                } else {
+                    if (!temp.unanswered.some(a => id === a.id)) {
+                        const { name, avatarURL: avatar, id: username } = users[author]
+                        temp.unanswered.push({ id, author: { name, avatar, username }, timestamp, value: value.text })
+                    }
+                }
+            }
+        }
+
+        temp.unanswered.forEach(ua => !temp.answered.includes(ua.id) && acc.unanswered.push(ua))
+
+
+        return acc
+    }, { answered: [], unanswered: [] })
+
+
     return {
-        authedUser
+        authedUser,
+        answered: answered.sort((a, b) => (b.timestamp - a.timestamp)),
+        unanswered: unanswered.sort((a, b) => (b.timestamp - a.timestamp))
+
     }
 }
 

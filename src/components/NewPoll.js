@@ -1,8 +1,7 @@
-import React, { Component} from 'react'
+import React, { Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {handleAddQuestion} from '../actions/shared'
-//import Nav from './Nav'
 
 class NewPoll extends Component {
     state={
@@ -46,47 +45,39 @@ class NewPoll extends Component {
             return <Redirect to='/home' />
         }
         return (
-            <div>
-                <main className='home'> 
-                    <section>
-                        
-                        <div className='glass'>
-                            <div className='poll-container'>
-                                <h2>Create New Question</h2>
-                                <div className='poll-intro'>
-                                    <h6>Complete the questions:</h6>
-                                    <h4>Would you rather ...</h4>
-                                </div>
-                                
-                                <form className='new-poll' onSubmit={this.handleSubmit}>
-                                    <input 
-                                        placeholder='Enter Option One Text Here'
-                                        type='text'
-                                        value={optionOne}
-                                        onChange={this.handleChange1}
-                                    />
-                                    <p className='message'>OR</p>
-                                    <input
-                                        placeholder='Enter Option Two Text Here'
-                                        type='text'
-                                        value={optionTwo}
-                                        onChange={this.handleChange2} 
-                                    />
-                                    <button
-                                        className='btn newquestion'
-                                        type='submit'
-                                        disabled={optionOne === '' || optionTwo === ''}
-                                    >
-                                        Submit
-                                    </button>
-                                </form>
-                            </div>   
+            <Fragment>
+                <div className='glass'>
+                    <div className='poll-container'>
+                        <h2>Create New Question</h2>
+                        <div className='poll-intro'>
+                            <h6>Complete the questions:</h6>
+                            <h4>Would you rather ...</h4>
                         </div>
-                    </section>
-                </main>
-                <div className="circle1"></div>
-                <div className="circle2"></div>   
-            </div>
+                        <form className='new-poll' onSubmit={this.handleSubmit}>
+                            <input 
+                                placeholder='Enter Option One Text Here'
+                                type='text'
+                                value={optionOne}
+                                onChange={this.handleChange1}
+                            />
+                            <p className='message'>OR</p>
+                            <input
+                                placeholder='Enter Option Two Text Here'
+                                type='text'
+                                value={optionTwo}
+                                onChange={this.handleChange2} 
+                            />
+                            <button
+                                className='btn newquestion'
+                                type='submit'
+                                disabled={optionOne === '' || optionTwo === ''}
+                            >
+                                Submit
+                            </button>
+                        </form>
+                    </div>   
+                </div> 
+            </Fragment>
         )
     }
 }

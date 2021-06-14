@@ -14,8 +14,14 @@ function PrivateRoute({isAuth, component: Component, path, ...rest}) {
                 if (isAuth) {
                     return (
                         <Fragment>
-                            <Nav />
-                            <Component {...props}/>
+                            <main className='home'>
+                                <section>
+                                    <Nav />
+                                    <Component {...props}/>
+                                </section>
+                                <div className="circle1"></div>
+                                <div className="circle2"></div>
+                            </main>  
                         </Fragment>
                     )
                 }else{

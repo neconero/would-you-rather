@@ -31,8 +31,6 @@ class Poll extends Component{
 
     
 
-    
-
     render() {
         if(this.props.authedUser === null){
             return this.props.history('/')
@@ -45,9 +43,6 @@ class Poll extends Component{
 
         return (
             <Fragment >
-                <main className='home'>
-                    <section>
-                        <Nav />
                         <div className='poll'>
                             <div className='poll-tab'>
                                 <div className='user-name'>{name} asks</div>
@@ -89,13 +84,8 @@ class Poll extends Component{
                                         </form>
                                     </div>
                                 </div>
-                            </div>
-                            
+                            </div>   
                         </div>
-                    </section>    
-                </main>
-                <div className="circle1"></div>
-                <div className="circle2"></div>
             </Fragment>
         )
     }

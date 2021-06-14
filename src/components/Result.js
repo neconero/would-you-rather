@@ -39,34 +39,27 @@ class Result extends Component {
         const secondOptionVotePercentage = Math.floor(100*(optionTwo.votes.length/totalVotes))
         return (
             <Fragment>
-                <main className='home'>
-                    <section>
-                        <Nav />
-                        <div className='result'>
-                                <div className="profile-name">
-                                    <h4>Asked by {name}</h4>
-                                    <img src={avatar} alt={`Avatar of ${name}`} className='avatar-img' />
-                                </div>  
-                                    <div className="poll-result">
-                                        <h3>Results</h3>
-                                        <div className={`score-card ${(this.borderColorUserChoice1() === 1) && 'score-card-border'}`}>
-                                            <p>{`Would you rather  ${optionOne.text}`}</p>
-                                            <ProgressBar now={firstOptionVotePercentage} label={`${firstOptionVotePercentage}%`}/>
-                                            <p>{`${optionOne.votes.length} out of ${totalVotes}`}</p>
-                                        </div>
-                                        <br />
-                                        <div className={`score-card ${(this.borderColorUserChoice1() === 2) && 'score-card-border'}`}>
-                                            <p>{`Would you rather  ${optionTwo.text}`}</p>
-                                            <ProgressBar now={secondOptionVotePercentage} label={`${secondOptionVotePercentage}%`}/>
-                                            <p>{`${optionTwo.votes.length} out of ${totalVotes}`}</p>
-                                        </div>
+                <div className='result'>
+                    <div className="profile-name">
+                        <h4>Asked by {name}</h4>
+                        <img src={avatar} alt={`Avatar of ${name}`} className='avatar-img' />
+                    </div>  
+                    <div className="poll-result">
+                        <h3>Results</h3>
+                        <div className={`score-card ${(this.borderColorUserChoice1() === 1) && 'score-card-border'}`}>
+                            <p>{`Would you rather  ${optionOne.text}`}</p>
+                            <ProgressBar now={firstOptionVotePercentage} label={`${firstOptionVotePercentage}%`}/>
+                            <p>{`${optionOne.votes.length} out of ${totalVotes}`}</p>
+                        </div>
+                        <br />
+                        <div className={`score-card ${(this.borderColorUserChoice1() === 2) && 'score-card-border'}`}>
+                            <p>{`Would you rather  ${optionTwo.text}`}</p>
+                            <ProgressBar now={secondOptionVotePercentage} label={`${secondOptionVotePercentage}%`}/>
+                            <p>{`${optionTwo.votes.length} out of ${totalVotes}`}</p>
+                        </div>
                                         
-                                    </div>
-                        </div>  
-                    </section>   
-                </main> 
-                <div className="circle1"></div>
-                <div className="circle2"></div> 
+                    </div>
+                </div>   
             </Fragment>
         )
     }
