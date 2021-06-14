@@ -1,63 +1,65 @@
-import React, { Component, Fragment} from 'react'
-import {handleInitialData, authenticateUser}  from '../actions/shared'
+import React, { Component, Fragment } from 'react'
+import { handleInitialData} from '../actions/shared'
 import LeaderBoard from './LeaderBoard'
 import LoginPage from './LoginPage'
 import NotFoundPage from './NotFoundPage'
+import PrivateRoute from '../routing/PrivateRoute'
 import NewPoll from './NewPoll'
 import Result from './Result'
 import Poll from './Poll'
 import Home from './Home'
 
 
-import {connect} from 'react-redux'
-import {Route, Switch,BrowserRouter as Router} from 'react-router-dom'
+
+import { connect } from 'react-redux'
+import { Route, Switch,  BrowserRouter as Router } from 'react-router-dom'
 
 
+class App extends Component {
 
-class App extends Component{
-
-  componentDidMount(){
-    if(!sessionStorage.getItem('authID')){
-      this.props.dispatch(handleInitialData())
-    }else{
-      this.props.dispatch(authenticateUser(sessionStorage.getItem('authID')))
-    }  
-  }
   
-  componentWillUpdate(nextProps, nextState) {
-    sessionStorage.setItem('authID', nextProps.authedUser)
+  componentDidMount() {
+    // if (!sessionStorage.getItem('authID')) {
+    //   this.props.dispatch(handleInitialData())
+    // } else {
+    //   this.props.dispatch(authenticateUser(sessionStorage.getItem('authID')))
+    // }
+    this.props.dispatch(handleInitialData())
   }
-  
+
+  // componentWillUpdate(nextProps, nextState) {
+  //   sessionStorage.setItem('authID', nextProps.authedUser)
+  // }
+
   render() {
-    const {authedUser} = this.props
+    // const history = createBrowserHistory()
+    const { authedUser } = this.props
+    console.log(authedUser)
+    // const {state = {}} = this.props.location
+    // const {error} = state
     return (
-                <div>
-                  <Router>
-                    {!authedUser ? (
-                      <Switch>
-                        <Route path='/' exact component={LoginPage} />
-                      </Switch> 
-                    ): (
-                      <Fragment>
-                        <Switch>
-                          <Route  path='/home' component={Home}   />
-                          <Route path='/add' component={NewPoll} />
-                          <Route path='/question/:id' component={Poll} />
-                          <Route path='/result/:id' component={Result} />
-                          <Route path='/leaderboard' component={LeaderBoard} />
-                          <Route component={NotFoundPage} />
-                        </Switch>
-                    </Fragment>
-                    )}
-                  </Router>
-                </div>
+          <Router>
+              <Fragment>
+                
+                <Switch>
+                  <Route path='/' exact component={LoginPage} />
+                  <PrivateRoute path='/home' component={Home}  />
+                  <PrivateRoute path='/add' component={NewPoll} />
+                  <PrivateRoute path='/question/:id' component={Poll}/>
+                  <PrivateRoute path='/result/:id' component={Result} />
+                  <PrivateRoute path='/leaderboard' component={LeaderBoard}/>
+                  <Route path='*' component={NotFoundPage} />
+                </Switch>
+                  
+              </Fragment>
+          </Router>
     )
   }
 }
 
 
 
-function mapStateToProps({authedUser}){
+function mapStateToProps({ authedUser }) {
   return {
     authedUser
   }

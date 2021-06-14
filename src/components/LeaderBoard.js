@@ -2,7 +2,7 @@ import React, { Component} from 'react'
 import ScoreCard from './ScoreCard'
 import {GiTrophyCup} from 'react-icons/gi'
 import {connect} from 'react-redux'
-import Nav from './Nav'
+//import Nav from './Nav'
 
 class LeaderBoard extends Component {
     componentDidMount() {
@@ -15,7 +15,6 @@ class LeaderBoard extends Component {
             <div>
                 <main className="home"> 
                     <section>
-                        <Nav />
                         <div className="glass">
                             <div className="trophy"><GiTrophyCup  size={300}/></div>
                             <div className="rank-board">

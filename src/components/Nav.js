@@ -71,7 +71,7 @@ class Nav extends React.Component {
 function mapStateToProps({authedUser, users}){
     const user = users[authedUser]
     
-    const{name, avatarURL} =  user 
+    const{name = '', avatarURL = ''} =  user ? user : null 
     return {
         authedUser,
         name,

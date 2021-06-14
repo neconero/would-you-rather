@@ -1,15 +1,16 @@
-import React, { Component} from 'react'
-import {authenticateUser} from '../actions/shared'
+import React, { Component, Fragment} from 'react'
+//import {authenticateUser} from '../actions/shared'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 import QHomeTab from './QHomeTab'
-import Nav from './Nav'
+//import Nav from './Nav'
 
 class Home extends Component {
 
-    componentDidUpdate() {
-        console.log(sessionStorage.getItem('authID'))
-        sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser(sessionStorage.getItem('authID')))
-    }
+    // componentDidUpdate() {
+    //     console.log(sessionStorage.getItem('authID'))
+    //     sessionStorage.getItem('authID') && this.props.dispatch(authenticateUser(sessionStorage.getItem('authID')))
+    // }
 
     componentDidMount() {
         if(this.props.authedUser === null) {
@@ -32,16 +33,15 @@ class Home extends Component {
     render() {
         
         return (
-            <div>
+            <Fragment>
                 <main className='home'>
                     <section >
-                        <Nav />
                         <QHomeTab />     
                     </section>
                     <div className="circle1"></div>
                     <div className="circle2"></div>
                 </main>     
-            </div>
+            </Fragment>
         )
     }
 
@@ -53,4 +53,4 @@ function mapStateToProps({authedUser}){
     }
 }
 
-export default connect(mapStateToProps)(Home)
+export default withRouter(connect(mapStateToProps)(Home))

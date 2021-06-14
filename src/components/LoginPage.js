@@ -2,18 +2,33 @@ import React, { Component, Fragment } from 'react'
 import {Typography, Divider, Grid} from '@material-ui/core'
 import LoginForm from './LoginForm'
 import { SiElectron } from "react-icons/si"
+import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 
 class LoginPage extends Component {
     state = {
-        loading: false
+        redirectToReferrer: false,
     }
 
-    handleLoading = () => {
-        this.setState({loading: true})
+    handleLogin = () => {
+        if(this.props.authedUser){
+            this.setState({redirectToReferrer: true})
+        }
+
+        
+        
+    }
+
+    componentDidMount() {
+        if(this.state.redirectToReferrer === true){
+            return <Redirect to={this.props.location.state.from || '/home'} />
+        }
     }
 
     render() {
+        
+        
         return(
             <Fragment >
                 <Grid container spacing={7} direction="column" justify="center" align="center" className='home'>
@@ -26,7 +41,7 @@ class LoginPage extends Component {
                         <SiElectron />
                     </Grid>
                     <Grid item xs={12}>
-                        <LoginForm onLoading={this.handleLoading}/>
+                        <LoginForm />
                     </Grid>
                     
                 </Grid>
@@ -35,4 +50,8 @@ class LoginPage extends Component {
     }
 }
 
-export default LoginPage
+function mapStateToProps({authedUser}){
+    return{authedUser}
+}
+
+export default connect(mapStateToProps)(LoginPage)

@@ -20,14 +20,18 @@ class LoginForm extends Component{
 
     handleSubmit = (event) => {
         event.preventDefault()
+        const {state = {}} = this.props.location
+        const {prevLocation} = state
         const {userID} = this.state
         if(userID !== 'Select'){
             this.props.dispatch(authenticateUser(userID))
-            this.props.history.push('/home')
-        }
+                .then(() => {
+                    this.props.history.push(prevLocation || '/home')
+                }) 
+        } 
     }
 
-    
+
 
     render() {
         
@@ -49,7 +53,7 @@ class LoginForm extends Component{
                                             ))}
                                     </select>
                                 </div>
-                                <button type="submit" className="log-btn">Log in</button>
+                                <button type="submit" className="log-btn" >Log in</button>
                             </form>  
                         </Fragment>                           
         )

@@ -2,7 +2,7 @@ import React, { Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {handleAddQuestion} from '../actions/shared'
-import Nav from './Nav'
+//import Nav from './Nav'
 
 class NewPoll extends Component {
     state={
@@ -49,7 +49,7 @@ class NewPoll extends Component {
             <div>
                 <main className='home'> 
                     <section>
-                        <Nav />
+                        
                         <div className='glass'>
                             <div className='poll-container'>
                                 <h2>Create New Question</h2>
