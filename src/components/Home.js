@@ -1,10 +1,8 @@
 import React, { Component, Fragment} from 'react'
-//import {authenticateUser} from '../actions/shared'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import Tabs from './Tabs'
-import QHomeTab from './QHomeTab'
-//import Nav from './Nav'
+
 
 class Home extends Component {
 

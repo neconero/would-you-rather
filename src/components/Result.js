@@ -3,7 +3,6 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import {connect} from 'react-redux'
 import {formatQuestion} from '../utils/helpers'
 import NotFoundPage from './NotFoundPage'
-import Nav from './Nav'
 
 class Result extends Component {
 

@@ -19,20 +19,13 @@ class App extends Component {
 
   
   componentDidMount() {
-    // if (!sessionStorage.getItem('authID')) {
-    //   this.props.dispatch(handleInitialData())
-    // } else {
-    //   this.props.dispatch(authenticateUser(sessionStorage.getItem('authID')))
-    // }
+    
     this.props.dispatch(handleInitialData())
   }
 
-  // componentWillUpdate(nextProps, nextState) {
-  //   sessionStorage.setItem('authID', nextProps.authedUser)
-  // }
+  
 
   render() {
-    // const history = createBrowserHistory()
     const { authedUser } = this.props
     console.log(authedUser)
     // const {state = {}} = this.props.location

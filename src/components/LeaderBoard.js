@@ -2,7 +2,7 @@ import React, { Component, Fragment} from 'react'
 import ScoreCard from './ScoreCard'
 import {GiTrophyCup} from 'react-icons/gi'
 import {connect} from 'react-redux'
-//import Nav from './Nav'
+
 
 class LeaderBoard extends Component {
     componentDidMount() {

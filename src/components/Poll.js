@@ -2,7 +2,6 @@ import React, { Component, Fragment} from 'react'
 import {formatQuestion} from '../utils/helpers'
 import {handleAnsweringQuestion} from '../actions/shared'
 import {connect} from 'react-redux'
-import Nav from './Nav'
 import {withRouter} from 'react-router-dom'
 
 class Poll extends Component{
