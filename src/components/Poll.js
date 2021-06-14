@@ -3,6 +3,7 @@ import {formatQuestion} from '../utils/helpers'
 import {handleAnsweringQuestion} from '../actions/shared'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import NotFoundPage from './NotFoundPage'
 
 class Poll extends Component{
     state={
@@ -33,6 +34,10 @@ class Poll extends Component{
     render() {
         if(this.props.authedUser === null){
             return this.props.history('/')
+        }
+
+        if(this.props.question === null){
+            return <NotFoundPage />
         }
 
         console.log(this.props.question)
